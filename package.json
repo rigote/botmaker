@@ -21,13 +21,17 @@
     ]
   },
   "dependencies": {
+    "bootstrap": "^5.2.2",
     "cross-env": "^7.0.3",
     "levenary": "^1.1.1",
     "next": "12.3.1",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "styled-icons": "^10.46.0",
+    "styled-media-query": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
