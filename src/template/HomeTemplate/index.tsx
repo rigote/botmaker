@@ -1,6 +1,5 @@
 import * as S from './styles'
-import { Form } from 'react-bootstrap'
-import Button from 'components/Button'
+import { Button, Form } from 'react-bootstrap'
 import { ChatSquare } from '@styled-icons/bootstrap'
 
 const HomeTemplate = () => (
@@ -28,7 +27,7 @@ const HomeTemplate = () => (
         </Form.Select>
       </Form.Group>
     </Form>
-    <Button color="blue" icon={<ChatSquare />} fullWidth>
+    <Button variant="primary" size="lg">
       Enviar
     </Button>
   </S.Wrapper>

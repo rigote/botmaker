@@ -35,6 +35,22 @@ export const Wrapper = styled.main`
         }
       }
     }
+
+    button {
+      padding: 8px;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      font-weight: 600;
+
+      ${media.greaterThan('huge')`
+        width: calc(90% - 1.5rem);
+
+      `}
+
+      ${media.lessThan('medium')`
+        width: 100%;
+      `}
+    }
   `}
 `
 
