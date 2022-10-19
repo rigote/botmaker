@@ -20,10 +20,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    const { authorization } = req.headers
+    const { x_authorization } = req.headers
 
     if (
-      authorization === `access-token: ${process.env.NEXT_PUBLIC_ACCESSTOKEN}`
+      x_authorization === `access-token: ${process.env.NEXT_PUBLIC_ACCESSTOKEN}`
     ) {
       try {
         const response = await api.get('v1.0/waTemplates')
