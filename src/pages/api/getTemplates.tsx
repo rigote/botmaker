@@ -23,7 +23,7 @@ export default async function handler(
     const { authorization } = req.headers
 
     if (
-      authorization === `access-token: ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
+      authorization === `access-token: ${process.env.NEXT_PUBLIC_ACCESSTOKEN}`
     ) {
       try {
         const response = await api.get('v1.0/waTemplates')

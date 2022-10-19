@@ -4,7 +4,10 @@ import { ChatSquare } from '@styled-icons/bootstrap'
 import { useGet } from 'hooks/api'
 
 const HomeTemplate = () => {
-  const { data: templates } = useGet('/getTemplates')
+  const { data: templates } = useGet(
+    '/getTemplates',
+    process.env.NEXT_PUBLIC_ACCESSTOKEN
+  )
 
   console.log(templates)
 

@@ -6,7 +6,8 @@ export const useGet = (url?: string, token?: string) => {
     local
       .get(url, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'access-token': token
         }
       })
       .then((r) => r.data)
