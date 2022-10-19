@@ -6,14 +6,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    res.setHeader(
-      'access-token',
-      JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
-    )
-    res.setHeader('Content-Type', 'application/json')
-
-    const response = await api.get('v1.0/waTemplates')
-
+    const response = await api.get('v1.0/waTemplates', {
+      headers: {
+        'Content-Type': 'application/json',
+        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+      }
+    })
     res.status(200).json(response)
   } catch (error: any) {
     console.error(error)
