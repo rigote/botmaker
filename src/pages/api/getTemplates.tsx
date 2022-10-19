@@ -19,7 +19,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
+  if (req.method === 'GET') {
     const { authorization } = req.headers
 
     if (
@@ -36,7 +36,7 @@ export default async function handler(
       res.status(401).end()
     }
   } else {
-    res.setHeader('Allow', 'POST')
+    res.setHeader('Allow', 'GET')
     res.status(405).end('Method Not Allowed')
   }
 }

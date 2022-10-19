@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 export const useGet = (url?: string, token?: string) => {
   return useSWR(url, (url: string) =>
-    api
+    local
       .get(url, {
         headers: {
           'Content-Type': 'application/json',
