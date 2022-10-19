@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     )
       .then((response) => response.text())
       .then((result) => {
-        return response
+        return result
       })
       .catch((error) => console.log('error', error))
 
