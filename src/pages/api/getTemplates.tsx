@@ -4,9 +4,7 @@ export default async (req: any, res: any) => {
   try {
     const response = await api.get('v1.0/waTemplates', {
       headers: {
-        'access-token': JSON.stringify(
-          process.env.NEXT_PUBLIC_ACCESS_TOKEN
-        ).replace(/\s/g, '')
+        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESS_TOKEN)
       }
     })
     res.json(response)
