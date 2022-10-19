@@ -13,22 +13,24 @@ export default async function handler(req, res) {
     //   }
     // })
 
-    const options = {
-      method: 'GET',
-      headers: {
-        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
-      }
-    }
-
     const response = await fetch(
       'https://go.botmaker.com/api/v1.0/waTemplates',
-      options
+      {
+        headers: {
+          'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+        }
+      }
     )
-      .then((response) => response.json())
       .then((response) => {
-        return response.json()
+        console.log(response)
       })
-      .catch((err) => console.error(err))
+      .then((data) => {
+        console.log(data)
+        return data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
     res.status(200).json(response)
   } catch (error) {
