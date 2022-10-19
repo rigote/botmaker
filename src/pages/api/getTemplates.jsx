@@ -6,14 +6,28 @@ export default async function handler(req, res) {
   res.setHeader('Date', new Date())
 
   try {
-    const response = await api.get('v1.0/waTemplates', {
+    // const response = await api.get('v1.0/waTemplates', {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+    //   }
+    // })
+
+    const options = {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `access-token ${JSON.stringify(
-          process.env.NEXT_PUBLIC_ACCESSTOKEN
-        )}`
+        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
       }
-    })
+    }
+
+    const response = await fetch(
+      'https://go.botmaker.com/api/v1.0/waTemplates',
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err))
+
     res.status(200).json(response)
   } catch (error) {
     console.error(error)
