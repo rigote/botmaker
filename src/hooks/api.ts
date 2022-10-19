@@ -1,9 +1,10 @@
+import api from 'api/api'
 import local from 'api/local'
 import useSWR from 'swr'
 
 export const useGet = (url?: string, token?: string) => {
   return useSWR(url, (url: string) =>
-    local
+    api
       .get(url, {
         headers: {
           'Content-Type': 'application/json',
