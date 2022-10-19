@@ -7,8 +7,11 @@ import api from 'api/api'
 
 const HomeTemplate = () => {
   const getTemplates = async () => {
-    const response = await api.get('v1.0/waTemplates', {
-      headers: { 'access-token': process.env.NEXT_PUBLIC_ACCESSTOKEN }
+    const response = await api.get('/v1.0/waTemplates', {
+      headers: {
+        'access-token': process.env.NEXT_PUBLIC_ACCESSTOKEN,
+        'Content-Type': 'application/json'
+      }
     })
     console.log(response)
   }
