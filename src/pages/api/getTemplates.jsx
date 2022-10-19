@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     )
       .then((response) => response.json())
       .then((response) => {
-        return response
+        return response.json()
       })
       .catch((err) => console.error(err))
 
