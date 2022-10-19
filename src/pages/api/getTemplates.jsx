@@ -7,34 +7,15 @@ export default async function handler(req, res) {
   res.setHeader('Date', new Date())
 
   try {
-    // const response = await api.get('v1.0/waTemplates', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
-    //   }
-    // })
-
-    var myHeaders = new Headers()
-    myHeaders.append(
-      'access-token',
-      JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+    api.defaults.headers.common['access-token'] = JSON.stringify(
+      process.env.NEXT_PUBLIC_ACCESSTOKEN
     )
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    }
-
-    const response = await fetch(
-      'https://go.botmaker.com/api/v1.0/waTemplates',
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        return result
-      })
-      .catch((error) => console.log('error', error))
+    const response = await api.get('v1.0/waTemplates', {
+      headers: {
+        'Content-Type': 'application/json',
+        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+      }
+    })
 
     res.status(200).json(response)
   } catch (error) {
