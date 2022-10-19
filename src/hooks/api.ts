@@ -1,4 +1,3 @@
-import api from 'api/api'
 import local from 'api/local'
 import useSWR from 'swr'
 
@@ -7,8 +6,7 @@ export const useGet = (url?: string, token?: string) => {
     local
       .get(url, {
         headers: {
-          'Content-Type': 'application/json',
-          'access-token': token
+          'Content-Type': 'application/json'
         }
       })
       .then((r) => r.data)
