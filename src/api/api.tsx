@@ -7,9 +7,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config: any) => {
-    config.headers['access-token'] = JSON.stringify(
+    config.headers['Authorization'] = `Bearer ${JSON.stringify(
       process.env.NEXT_PUBLIC_ACCESSTOKEN
-    )
+    )}`
     return config
   },
   (err) => {
