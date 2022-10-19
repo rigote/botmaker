@@ -1,6 +1,5 @@
 import api from 'api/api'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 // export default async (req: any, res: any) => {
 //   try {
