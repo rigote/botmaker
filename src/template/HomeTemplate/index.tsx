@@ -2,14 +2,20 @@ import * as S from './styles'
 import { Button, Form } from 'react-bootstrap'
 import { ChatSquare } from '@styled-icons/bootstrap'
 import { useGet } from 'hooks/api'
+import { useEffect } from 'react'
+import api from 'api/api'
 
 const HomeTemplate = () => {
-  const { data: templates } = useGet(
-    '/getTemplates',
-    process.env.NEXT_PUBLIC_ACCESSTOKEN
-  )
+  const getTemplates = async () => {
+    const response = await api.get('v1.0/waTemplates', {
+      headers: { 'access-token': process.env.NEXT_PUBLIC_ACCESSTOKEN }
+    })
+    console.log(response)
+  }
 
-  console.log(templates)
+  useEffect(() => {
+    getTemplates()
+  }, [])
 
   return (
     <S.Wrapper>
