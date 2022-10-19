@@ -7,7 +7,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config: any) => {
-    config.headers['Authorization'] = `Bearer ${JSON.stringify(
+    config.headers['access-token'] = `${JSON.stringify(
       process.env.NEXT_PUBLIC_ACCESSTOKEN
     )}`
     return config
