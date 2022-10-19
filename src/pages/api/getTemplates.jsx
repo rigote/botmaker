@@ -7,13 +7,9 @@ export default async function handler(req, res) {
   res.setHeader('Date', new Date())
 
   try {
-    api.defaults.headers.common['access-token'] = JSON.stringify(
-      process.env.NEXT_PUBLIC_ACCESSTOKEN
-    )
     const response = await api.get('v1.0/waTemplates', {
       headers: {
-        'Content-Type': 'application/json',
-        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+        'Content-Type': 'application/json'
       }
     })
 
