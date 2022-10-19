@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const response = await api.get('/v1.0/waTemplates', {
+    const response = await api.get('v1.0/waTemplates', {
       headers: {
         'Content-Type': 'application/json',
         'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
