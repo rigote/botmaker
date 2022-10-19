@@ -9,7 +9,9 @@ export default async function handler(req, res) {
     const response = await api.get('v1.0/waTemplates', {
       headers: {
         'Content-Type': 'application/json',
-        'access-token': JSON.stringify(process.env.NEXT_PUBLIC_ACCESSTOKEN)
+        Authorization: `access-token ${JSON.stringify(
+          process.env.NEXT_PUBLIC_ACCESSTOKEN
+        )}`
       }
     })
     res.status(200).json(response)
