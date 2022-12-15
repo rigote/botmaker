@@ -35,8 +35,6 @@ const HomeTemplate = () => {
     setVariables(tempArr)
   }
 
-  console.log('Agents', agents)
-
   return (
     <S.Wrapper>
       <S.Name>
@@ -77,6 +75,12 @@ const HomeTemplate = () => {
           <Form.Label>Atribuir retorno ao agente</Form.Label>
           <Form.Select aria-label="Selecione um agente">
             <option>Selectione um agente</option>
+            {!!Object &&
+              agents?.users.map((item: any, index: any) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
           </Form.Select>
         </Form.Group>
       </Form>
