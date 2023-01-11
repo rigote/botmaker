@@ -7,8 +7,7 @@ export default async function handler(req, res) {
   res.setHeader('Date', new Date())
 
   try {
-    const response = await api.post('v1.0/intent/v2', {
-      params: JSON.stringify(req.body.apiParams),
+    const response = await api.post('v1.0/intent/v2', req.body.apiParams, {
       headers: {
         'Content-Type': 'application/json'
       }
