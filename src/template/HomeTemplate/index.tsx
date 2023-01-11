@@ -19,11 +19,12 @@ const HomeTemplate = () => {
   const { data: agents } = useGet('/getAgent')
 
   const getVariables = (str: any) => {
+    const text = str.split('-')
     const regex = /\$\{\b.*?}/gs
     let m
     const tempArr: string[] = []
 
-    while ((m = regex.exec(str)) !== null) {
+    while ((m = regex.exec(text[0])) !== null) {
       if (m.index === regex.lastIndex) {
         regex.lastIndex++
       }
@@ -33,13 +34,14 @@ const HomeTemplate = () => {
       })
     }
 
+    setApiParams({ ...apiParams, ruleNameOrId: text[1] })
     setVariables(tempArr)
   }
 
   const sendBotMaker = async () => {
     console.log(apiParams)
-    const res = await local.post('/sendBotmaker', apiParams)
-    console.log(res)
+    //const res = await local.post('/sendBotmaker', apiParams)
+    //console.log(res)
   }
 
   return (
@@ -69,7 +71,7 @@ const HomeTemplate = () => {
             <option>Selecione um template</option>
             {!!Object &&
               templates?.waTemplates.map((item: any, index: any) => (
-                <option key={index} value={item.content}>
+                <option key={index} value={item.content + '-' + item.name}>
                   {item.name}
                 </option>
               ))}
