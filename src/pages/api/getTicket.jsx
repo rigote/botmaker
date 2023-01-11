@@ -7,15 +7,17 @@ export default async function handler(req, res) {
   res.setHeader('Date', new Date())
 
   try {
-    const response = await zen.get(
-      `v2/search.json?status=new,open&query=rea.body.uuidzendesk`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${process.env.NEXT_PUBLIC_ZENDESKACCESSTOKEN}`
-        }
+    const response = await zen.get('v2/search.json', {
+      params: {
+        role: ['agent', 'admin'],
+        status: 'new,open',
+        query: req.query.uuidzendesk
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${process.env.NEXT_PUBLIC_ZENDESKACCESSTOKEN}`
       }
-    )
+    })
 
     res.status(200).json(response.data)
   } catch (error) {
