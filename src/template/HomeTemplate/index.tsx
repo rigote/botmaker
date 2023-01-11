@@ -39,9 +39,8 @@ const HomeTemplate = () => {
   }
 
   const sendBotMaker = async () => {
-    console.log(apiParams)
-    //const res = await local.post('/sendBotmaker', apiParams)
-    //console.log(res)
+    const res = await local.post('/sendBotmaker', apiParams)
+    console.log(res)
   }
 
   return (
