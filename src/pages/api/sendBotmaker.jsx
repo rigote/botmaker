@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await api.post('v1.0/intent/v2', {
-      params: req.body.apiParams,
+      params: JSON.stringify(req.body.apiParams),
       headers: {
         'Content-Type': 'application/json'
       }
