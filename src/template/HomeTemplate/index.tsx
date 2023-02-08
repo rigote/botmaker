@@ -1,5 +1,5 @@
 import * as S from './styles'
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Button, Col, Form, Row, Spinner } from 'react-bootstrap'
 import { ChatSquare } from '@styled-icons/bootstrap'
 import { useGet } from 'hooks/api'
 import { useState } from 'react'
@@ -14,6 +14,7 @@ const HomeTemplate = () => {
     params: {}
   })
   const [variables, setVariables] = useState<string[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   const { data: templates } = useGet('/getTemplates')
   const { data: agents } = useGet('/getAgent')
@@ -39,8 +40,10 @@ const HomeTemplate = () => {
   }
 
   const sendBotMaker = async () => {
+    setLoading(true)
     const res = await local.post('/sendBotmaker', apiParams)
     console.log(res)
+    setLoading(false)
   }
 
   return (
@@ -115,7 +118,17 @@ const HomeTemplate = () => {
         </Form.Group>
       </Form>
       <Button variant="primary" size="lg" onClick={() => sendBotMaker()}>
-        Enviar
+        {loading ? (
+          <>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+            &nbsp;
+            <span>Enviando</span>
+          </>
+        ) : (
+          <span>Enviar</span>
+        )}
       </Button>
     </S.Wrapper>
   )
