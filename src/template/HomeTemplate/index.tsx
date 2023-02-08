@@ -1,6 +1,5 @@
 import * as S from './styles'
-import { Button, Col, Form, Row, Spinner } from 'react-bootstrap'
-import { ChatSquare } from '@styled-icons/bootstrap'
+import { Alert, Button, Form, Spinner } from 'react-bootstrap'
 import { useGet } from 'hooks/api'
 import { useState } from 'react'
 import local from 'api/local'
@@ -15,6 +14,10 @@ const HomeTemplate = () => {
   })
   const [variables, setVariables] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [alert, setAlert] = useState({
+    show: false,
+    variant: 'success'
+  })
 
   const { data: templates } = useGet('/getTemplates')
   const { data: agents } = useGet('/getAgent')
@@ -41,9 +44,17 @@ const HomeTemplate = () => {
 
   const sendBotMaker = async () => {
     setLoading(true)
-    const res = await local.post('/sendBotmaker', apiParams)
-    console.log(res)
+    try {
+      const res = await local.post('/sendBotmaker', apiParams)
+      console.log(res)
+      setAlert({ ...alert, show: true, variant: 'success' })
+    } catch (error) {
+      setAlert({ ...alert, show: true, variant: 'danger' })
+    }
     setLoading(false)
+    setTimeout(() => {
+      setAlert({ ...alert, show: false })
+    }, 2000)
   }
 
   return (
@@ -53,6 +64,16 @@ const HomeTemplate = () => {
         <b>Botmaker Bot</b>
       </S.Name>
       <Form>
+        <Alert
+          key={alert.variant}
+          variant={alert.variant}
+          transition={alert.show}
+          show={alert.show}
+        >
+          {alert.variant === 'success'
+            ? 'Enviado com sucesso!'
+            : 'Ocorreu um erro, tente novamente'}
+        </Alert>
         <Form.Group controlId="phoneNumber">
           <Form.Label>Número de telefone</Form.Label>
           <Form.Control
