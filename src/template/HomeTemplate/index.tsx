@@ -39,10 +39,6 @@ const HomeTemplate = () => {
     }
 
     setApiParams({ ...apiParams, ruleNameOrId: text[1] })
-    setApiParams({
-      ...apiParams,
-      params: { ...apiParams.params, ['template_message']: text[0] }
-    })
     setVariables(tempArr)
   }
 
