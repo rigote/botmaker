@@ -134,11 +134,13 @@ const HomeTemplate = () => {
           >
             <option>Selectione um agente</option>
             {!!Object &&
-              agents?.users.map((item: any, index: any) => (
-                <option key={index} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
+              agents?.users
+                .filter((u: any) => u.role_type !== 1)
+                .map((item: any, index: any) => (
+                  <option key={index} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
           </Form.Select>
         </Form.Group>
       </Form>
