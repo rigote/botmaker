@@ -50,7 +50,12 @@ const HomeTemplate = () => {
     setLoading(true)
     try {
       const res = await local.post('/sendBotmaker', apiParams)
-      console.log(res)
+      setApiParams({
+        ...apiParams,
+        platformContactId: '',
+        ruleNameOrId: '',
+        params: {}
+      })
       setAlert({ ...alert, show: true, variant: 'success' })
     } catch (error) {
       setAlert({ ...alert, show: true, variant: 'danger' })
