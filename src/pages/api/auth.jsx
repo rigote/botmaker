@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       chat: req.body.chatChannelNumber
     }
 
-    res.status(200).json(response.data)
+    res.status(200).json(response)
   } catch (error) {
     console.error(error)
     res.status(error.status || 500).end(error.message)
