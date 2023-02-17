@@ -10,8 +10,8 @@ export default async function handler(req, res) {
     const response = await zen.get('v2/users', {
       params: { role: ['agent', 'admin'], role_type: '0' },
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${process.env.NEXT_PUBLIC_ZENDESKACCESSTOKEN}`
+        'Content-Type': 'application/json'
+        // Authorization: `Basic ${process.env.NEXT_PUBLIC_ZENDESKACCESSTOKEN}`
       }
     })
 
