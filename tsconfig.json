@@ -28,5 +28,5 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/IframeVideo/index.jsx"
-, "src/pages/api/getTemplates.jsx"  ]
+, "src/pages/api/getTemplates.jsx", "src/template/HomeTemplate/index.jsx"  ]
 }

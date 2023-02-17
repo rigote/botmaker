@@ -1,10 +1,18 @@
+/* eslint-disable no-undef */
 import * as S from './styles'
 import { Alert, Button, Form, Spinner } from 'react-bootstrap'
 import { useGet } from 'hooks/api'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import local from 'api/local'
+import Script from 'next/script'
 
 const HomeTemplate = () => {
+  const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
+  const [validateFields, setValidateFields] = {
+    zen: '',
+    bot: '',
+    chat: ''
+  }
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
     chatChannelNumber: '553599347686',
@@ -12,21 +20,46 @@ const HomeTemplate = () => {
     ruleNameOrId: '',
     params: {}
   })
-  const [variables, setVariables] = useState<string[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [variables, setVariables] = useState([])
+  const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState({
     show: false,
     variant: 'success'
   })
 
+  const authToken = async () => {
+    const vars = {
+      chatChannelNumber: '{{setting.chatChannelNumber}}',
+      zendeskAccessToken: '{{setting.zendeskAccessToken}}',
+      botmakerAccessToken: '{{setting.botmakerAccessToken}}'
+    }
+
+    const options = {
+      url: 'https://jet-commerce.vercel.app/api/auth',
+      type: 'POST',
+      secure: true,
+      contentType: 'application/json',
+      data: JSON.stringify(vars)
+    }
+
+    client.request(options).then((results) => {
+      setValidateFields({
+        ...validateFields,
+        zen: results.zenToken,
+        bot: results.botToken,
+        chat: results.chat
+      })
+    })
+  }
+
   const { data: templates } = useGet('/getTemplates')
   const { data: agents } = useGet('/getAgent')
 
-  const getVariables = (str: any) => {
+  const getVariables = (str) => {
     const text = str.split('-')
     const regex = /\$\{\b.*?}/gs
     let m
-    const tempArr: string[] = []
+    const tempArr = []
 
     while ((m = regex.exec(text[0])) !== null) {
       if (m.index === regex.lastIndex) {
@@ -66,8 +99,18 @@ const HomeTemplate = () => {
     }, 2000)
   }
 
+  useEffect(() => {
+    if (client) {
+      authToken()
+    }
+  }, [])
+
   return (
     <S.Wrapper>
+      <Script
+        type="text/javascript"
+        src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"
+      ></Script>
       <S.Name>
         <span>Nome</span>
         <b>Botmaker Bot</b>
@@ -102,7 +145,7 @@ const HomeTemplate = () => {
           >
             <option>Selecione um template</option>
             {!!Object &&
-              templates?.waTemplates.map((item: any, index: any) => (
+              templates?.waTemplates.map((item, index) => (
                 <option key={index} value={item.content + '-' + item.name}>
                   {item.name}
                 </option>
@@ -140,8 +183,8 @@ const HomeTemplate = () => {
             <option>Selectione um agente</option>
             {!!Object &&
               agents?.users
-                .filter((u: any) => u.role_type !== 1)
-                .map((item: any, index: any) => (
+                .filter((u) => u.role_type !== 1)
+                .map((item, index) => (
                   <option key={index} value={item.id}>
                     {item.name}
                   </option>
