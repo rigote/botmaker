@@ -100,6 +100,7 @@ const HomeTemplate = () => {
   }
 
   useEffect(() => {
+    console.log(client)
     setTimeout(() => {
       if (client) {
         console.log('Chamou')
