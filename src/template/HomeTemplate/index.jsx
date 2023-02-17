@@ -8,11 +8,11 @@ import Script from 'next/script'
 
 const HomeTemplate = () => {
   const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
-  const [validateFields, setValidateFields] = {
+  const [validateFields, setValidateFields] = useState({
     zen: '',
     bot: '',
     chat: ''
-  }
+  })
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
     chatChannelNumber: '553599347686',
