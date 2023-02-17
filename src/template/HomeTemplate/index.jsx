@@ -100,21 +100,13 @@ const HomeTemplate = () => {
   }
 
   useEffect(() => {
-    console.log(client)
-    setTimeout(() => {
-      if (client) {
-        console.log('Chamou')
-        authToken()
-      }
-    }, 1500)
+    if (client) {
+      authToken()
+    }
   }, [])
 
   return (
     <S.Wrapper>
-      <Script
-        type="text/javascript"
-        src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"
-      ></Script>
       <S.Name>
         <span>Nome</span>
         <b>Botmaker Bot</b>

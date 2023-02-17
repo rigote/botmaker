@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
+import Script from 'next/script'
 
 function App({ Component, pageProps }: AppProps) {
   const GlobalStyleProxy: any = GlobalStyles
@@ -22,6 +23,10 @@ function App({ Component, pageProps }: AppProps) {
           content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
         />
       </Head>
+      <Script
+        type="text/javascript"
+        src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"
+      ></Script>
       <GlobalStyleProxy />
       <Component {...pageProps} />
     </ThemeProxy>
