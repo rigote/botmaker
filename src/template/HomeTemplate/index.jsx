@@ -101,6 +101,7 @@ const HomeTemplate = () => {
 
   useEffect(() => {
     if (client) {
+      console.log('Chamou')
       authToken()
     }
   }, [])
