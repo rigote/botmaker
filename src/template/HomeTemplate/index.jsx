@@ -100,10 +100,12 @@ const HomeTemplate = () => {
   }
 
   useEffect(() => {
-    if (client) {
-      console.log('Chamou')
-      authToken()
-    }
+    setTimeout(() => {
+      if (client) {
+        console.log('Chamou')
+        authToken()
+      }
+    }, 1500)
   }, [])
 
   return (
