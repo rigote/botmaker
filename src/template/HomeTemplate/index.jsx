@@ -10,9 +10,14 @@ const HomeTemplate = () => {
   const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
   const [agents, setAgents] = useState({})
   const [templates, setTemplates] = useState({})
+  const vars = {
+    chatChannelNumber: '{{setting.chatChannelNumber}}',
+    zendeskAccessToken: '{{setting.zendeskAccessToken}}',
+    botmakerAccessToken: '{{setting.botmakerAccessToken}}'
+  }
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
-    chatChannelNumber: '553599347686',
+    chatChannelNumber: vars.chatChannelNumber,
     platformContactId: '',
     ruleNameOrId: '',
     params: {}
@@ -23,11 +28,6 @@ const HomeTemplate = () => {
     show: false,
     variant: 'success'
   })
-  const vars = {
-    chatChannelNumber: '{{setting.chatChannelNumber}}',
-    zendeskAccessToken: '{{setting.zendeskAccessToken}}',
-    botmakerAccessToken: '{{setting.botmakerAccessToken}}'
-  }
 
   const getUsers = async () => {
     const options = {
@@ -108,7 +108,7 @@ const HomeTemplate = () => {
     }
   }, [])
 
-  console.log('Templates', templates)
+  console.log('apiParams', apiParams)
 
   return (
     <S.Wrapper>
