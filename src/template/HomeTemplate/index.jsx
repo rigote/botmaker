@@ -28,12 +28,6 @@ const HomeTemplate = () => {
     variant: 'success'
   })
 
-  client.metadata().then(function (metadata) {
-    setApiParams({
-      ...apiParams,
-      chatChannelNumber: metadata.settings.chatChannelNumber
-    })
-  })
   const getUsers = async () => {
     const options = {
       url: 'https://botmaker.vercel.app/api/getAgent',
@@ -110,6 +104,12 @@ const HomeTemplate = () => {
     if (client) {
       getUsers()
       getTemplates()
+      client.metadata().then(function (metadata) {
+        setApiParams({
+          ...apiParams,
+          chatChannelNumber: metadata.settings.chatChannelNumber
+        })
+      })
     }
   }, [])
 
