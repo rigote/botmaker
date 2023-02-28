@@ -43,12 +43,13 @@ const HomeTemplate = () => {
     }
 
     client.request(options).then((results) => {
-      setValidateFields({
-        ...validateFields,
-        zen: results.zenToken,
-        bot: results.botToken,
-        chat: results.chat
-      })
+      console.log('Get agent', results)
+      // setValidateFields({
+      //   ...validateFields,
+      //   zen: results.zenToken,
+      //   bot: results.botToken,
+      //   chat: results.chat
+      // })
     })
   }
 
@@ -104,8 +105,6 @@ const HomeTemplate = () => {
       authToken()
     }
   }, [])
-
-  console.log('Get agent', authToken)
 
   return (
     <S.Wrapper>
