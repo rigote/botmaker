@@ -11,13 +11,12 @@ const HomeTemplate = () => {
   const [agents, setAgents] = useState({})
   const [templates, setTemplates] = useState({})
   const vars = {
-    chatChannelNumber: '{{setting.chatChannelNumber}}',
     zendeskAccessToken: '{{setting.zendeskAccessToken}}',
     botmakerAccessToken: '{{setting.botmakerAccessToken}}'
   }
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
-    chatChannelNumber: vars.chatChannelNumber,
+    chatChannelNumber: metadata.settings.chatChannelNumber,
     platformContactId: '',
     ruleNameOrId: '',
     params: {}
