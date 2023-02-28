@@ -82,18 +82,27 @@ const HomeTemplate = () => {
 
   const sendBotMaker = async () => {
     setLoading(true)
-    try {
-      const res = await local.post('/sendBotmaker', apiParams)
-      setApiParams({
-        ...apiParams,
-        platformContactId: '',
-        ruleNameOrId: '',
-        params: {}
-      })
-      setAlert({ ...alert, show: true, variant: 'success' })
-    } catch (error) {
-      setAlert({ ...alert, show: true, variant: 'danger' })
+    const dataSend = {
+      apiParams: apiParams,
+      botmakerAccessToken: vars.botmakerAccessToken
     }
+
+    const options = {
+      url: 'https://botmaker.vercel.app/api/sendBotmaker',
+      type: 'POST',
+      secure: true,
+      contentType: 'application/json',
+      data: JSON.stringify(dataSend)
+    }
+
+    client.request(options).then((results) => {
+      try {
+        setAlert({ ...alert, show: true, variant: 'success' })
+      } catch (error) {
+        setAlert({ ...alert, show: true, variant: 'danger' })
+      }
+    })
+
     setLoading(false)
     setTimeout(() => {
       setAlert({ ...alert, show: false })
@@ -112,8 +121,6 @@ const HomeTemplate = () => {
       })
     }
   }, [])
-
-  console.log('apiParams', apiParams)
 
   return (
     <S.Wrapper>
