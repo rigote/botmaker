@@ -16,7 +16,7 @@ const HomeTemplate = () => {
   }
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
-    chatChannelNumber: metadata.settings.chatChannelNumber,
+    chatChannelNumber: '',
     platformContactId: '',
     ruleNameOrId: '',
     params: {}
@@ -28,6 +28,12 @@ const HomeTemplate = () => {
     variant: 'success'
   })
 
+  client.metadata().then(function (metadata) {
+    setApiParams({
+      ...apiParams,
+      chatChannelNumber: metadata.settings.chatChannelNumber
+    })
+  })
   const getUsers = async () => {
     const options = {
       url: 'https://botmaker.vercel.app/api/getAgent',
