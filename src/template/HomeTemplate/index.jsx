@@ -8,11 +8,7 @@ import Script from 'next/script'
 
 const HomeTemplate = () => {
   const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
-  const [validateFields, setValidateFields] = useState({
-    zen: '',
-    bot: '',
-    chat: ''
-  })
+  const [agents, setAgents] = useState({})
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
     chatChannelNumber: '553599347686',
@@ -43,18 +39,11 @@ const HomeTemplate = () => {
     }
 
     client.request(options).then((results) => {
-      console.log('Get agent', results)
-      // setValidateFields({
-      //   ...validateFields,
-      //   zen: results.zenToken,
-      //   bot: results.botToken,
-      //   chat: results.chat
-      // })
+      setAgents(results.users)
     })
   }
 
   const { data: templates } = useGet('/getTemplates')
-  const { data: agents } = useGet('/getAgent')
 
   const getVariables = (str) => {
     const text = str.split('-')
