@@ -170,7 +170,7 @@ const HomeTemplate = () => {
           >
             <option>Selectione um agente</option>
             {Object.keys(agents).length > 0 &&
-              agents?.users
+              agents
                 .filter((u) => u.role_type !== 1)
                 .map((item, index) => (
                   <option key={index} value={item.id}>
