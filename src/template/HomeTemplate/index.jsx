@@ -169,7 +169,7 @@ const HomeTemplate = () => {
             }
           >
             <option>Selectione um agente</option>
-            {Object.keys(agents.users).length > 0 &&
+            {Object.keys(agents).length > 0 &&
               agents?.users
                 .filter((u) => u.role_type !== 1)
                 .map((item, index) => (
