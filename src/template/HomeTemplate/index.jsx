@@ -35,7 +35,7 @@ const HomeTemplate = () => {
     }
 
     const options = {
-      url: 'https://botmaker.vercel.app/api/auth',
+      url: 'https://botmaker.vercel.app/api/getAgent',
       type: 'POST',
       secure: true,
       contentType: 'application/json',
