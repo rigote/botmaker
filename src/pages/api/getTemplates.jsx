@@ -9,7 +9,8 @@ export default async function handler(req, res) {
   try {
     const response = await api.get('v1.0/waTemplates', {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'access-token': `${req.body.botmakerAccessToken}`
       }
     })
 

@@ -9,6 +9,7 @@ import Script from 'next/script'
 const HomeTemplate = () => {
   const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
   const [agents, setAgents] = useState({})
+  const [templates, setTemplates] = useState({})
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
     chatChannelNumber: '553599347686',
@@ -22,14 +23,13 @@ const HomeTemplate = () => {
     show: false,
     variant: 'success'
   })
+  const vars = {
+    chatChannelNumber: '{{setting.chatChannelNumber}}',
+    zendeskAccessToken: '{{setting.zendeskAccessToken}}',
+    botmakerAccessToken: '{{setting.botmakerAccessToken}}'
+  }
 
-  const authToken = async () => {
-    const vars = {
-      chatChannelNumber: '{{setting.chatChannelNumber}}',
-      zendeskAccessToken: '{{setting.zendeskAccessToken}}',
-      botmakerAccessToken: '{{setting.botmakerAccessToken}}'
-    }
-
+  const getUsers = async () => {
     const options = {
       url: 'https://botmaker.vercel.app/api/getAgent',
       type: 'POST',
@@ -43,7 +43,19 @@ const HomeTemplate = () => {
     })
   }
 
-  const { data: templates } = useGet('/getTemplates')
+  const getTemplates = async () => {
+    const options = {
+      url: 'https://botmaker.vercel.app/api/getTemplates',
+      type: 'POST',
+      secure: true,
+      contentType: 'application/json',
+      data: JSON.stringify(vars)
+    }
+
+    client.request(options).then((results) => {
+      setTemplates(results.waTemplates)
+    })
+  }
 
   const getVariables = (str) => {
     const text = str.split('-')
@@ -91,11 +103,12 @@ const HomeTemplate = () => {
 
   useEffect(() => {
     if (client) {
-      authToken()
+      getUsers()
+      getTemplates()
     }
   }, [])
 
-  console.log('Agents', agents)
+  console.log('Templates', templates)
 
   return (
     <S.Wrapper>
@@ -132,8 +145,8 @@ const HomeTemplate = () => {
             onChange={(e) => getVariables(e.target.value)}
           >
             <option>Selecione um template</option>
-            {!!Object &&
-              templates?.waTemplates.map((item, index) => (
+            {Object.keys(templates).length > 0 &&
+              templates.map((item, index) => (
                 <option key={index} value={item.content + '-' + item.name}>
                   {item.name}
                 </option>

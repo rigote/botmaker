@@ -5,15 +5,15 @@ const api = axios.create({
   responseType: 'json'
 })
 
-api.interceptors.request.use(
-  (config: any) => {
-    config.headers['access-token'] = `${process.env.NEXT_PUBLIC_ACCESSTOKEN}`
-    return config
-  },
-  (err) => {
-    console.log('Token error: ', err)
-    return Promise.reject(err)
-  }
-)
+// api.interceptors.request.use(
+//   (config: any) => {
+//     config.headers['access-token'] = `${process.env.NEXT_PUBLIC_ACCESSTOKEN}`
+//     return config
+//   },
+//   (err) => {
+//     console.log('Token error: ', err)
+//     return Promise.reject(err)
+//   }
+// )
 
 export default api
