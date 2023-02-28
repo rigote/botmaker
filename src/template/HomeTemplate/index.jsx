@@ -95,6 +95,8 @@ const HomeTemplate = () => {
     }
   }, [])
 
+  console.log('Agents', agents)
+
   return (
     <S.Wrapper>
       <S.Name>
