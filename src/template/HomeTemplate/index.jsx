@@ -8,7 +8,7 @@ import Script from 'next/script'
 
 const HomeTemplate = () => {
   const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
-  const [agents, setAgents] = useState({})
+  const [agents, setAgents] = useState({ users: {} })
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
     chatChannelNumber: '553599347686',
@@ -39,7 +39,7 @@ const HomeTemplate = () => {
     }
 
     client.request(options).then((results) => {
-      setAgents(results.users)
+      setAgents({ ...users, users: results.users })
     })
   }
 
