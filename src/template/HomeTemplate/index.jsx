@@ -8,7 +8,7 @@ import Script from 'next/script'
 
 const HomeTemplate = () => {
   const client = typeof ZAFClient !== 'undefined' && ZAFClient.init()
-  const [agents, setAgents] = useState({ users: {} })
+  const [agents, setAgents] = useState({})
   const [apiParams, setApiParams] = useState({
     chatPlatform: 'whatsapp',
     chatChannelNumber: '553599347686',
@@ -39,7 +39,7 @@ const HomeTemplate = () => {
     }
 
     client.request(options).then((results) => {
-      setAgents({ ...users, users: results.users })
+      setAgents(results.users)
     })
   }
 
@@ -170,7 +170,7 @@ const HomeTemplate = () => {
           >
             <option>Selectione um agente</option>
             {Object.keys(agents.users).length > 0 &&
-              agents.users
+              agents?.users
                 .filter((u) => u.role_type !== 1)
                 .map((item, index) => (
                   <option key={index} value={item.id}>
