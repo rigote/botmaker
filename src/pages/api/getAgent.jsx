@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       params: { role: ['agent', 'admin'], role_type: '0' },
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `${req.body.vars.zendeskAccessToken}` //`Basic ${process.env.NEXT_PUBLIC_ZENDESKACCESSTOKEN}`
+        Authorization: `${req.body.zendeskAccessToken}` //`Basic ${process.env.NEXT_PUBLIC_ZENDESKACCESSTOKEN}`
       }
     })
 
