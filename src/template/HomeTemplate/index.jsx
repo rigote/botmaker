@@ -53,7 +53,7 @@ const HomeTemplate = () => {
   }
 
   const { data: templates } = useGet('/getTemplates')
-  const { data: agents } = useGet('/getAgent')
+  //const { data: agents } = useGet('/getAgent')
 
   const getVariables = (str) => {
     const text = str.split('-')
@@ -104,6 +104,8 @@ const HomeTemplate = () => {
       authToken()
     }
   }, [])
+
+  console.log('Get agent', authToken)
 
   return (
     <S.Wrapper>
