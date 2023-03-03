@@ -24,7 +24,7 @@ const HomeTemplate = () => {
   const [variables, setVariables] = useState([])
   const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState({
-    show: true,
+    show: false,
     variant: 'success'
   })
 
@@ -95,13 +95,14 @@ const HomeTemplate = () => {
       data: JSON.stringify(dataSend)
     }
 
-    client.request(options).then((results) => {
-      try {
-        setAlert({ ...alert, show: true, variant: 'success' })
-      } catch (error) {
-        setAlert({ ...alert, show: true, variant: 'danger' })
-      }
-    })
+    try {
+      setAlert({ ...alert, show: true, variant: 'success' })
+      client.request(options).then((results) => {
+        console.log(results)
+      })
+    } catch (error) {
+      setAlert({ ...alert, show: true, variant: 'danger' })
+    }
 
     setTimeout(() => {
       setAlert({ ...alert, show: false })
