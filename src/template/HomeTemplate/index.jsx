@@ -98,9 +98,9 @@ const HomeTemplate = () => {
     try {
       setTimeout(() => {
         setAlert({ ...alert, show: true, variant: 'success' })
+        setLoading(false)
         setTimeout(() => {
           setAlert({ ...alert, show: false })
-          setLoading(false)
         }, 2000)
       }, 2000)
       client.request(options).then((results) => {
