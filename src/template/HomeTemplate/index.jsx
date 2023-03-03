@@ -96,18 +96,21 @@ const HomeTemplate = () => {
     }
 
     try {
-      setAlert({ ...alert, show: true, variant: 'success' })
       client.request(options).then((results) => {
         console.log(results)
+        setAlert({ ...alert, show: true, variant: 'success' })
+        setTimeout(() => {
+          setAlert({ ...alert, show: false })
+          setLoading(false)
+        }, 2000)
       })
     } catch (error) {
       setAlert({ ...alert, show: true, variant: 'danger' })
+      setTimeout(() => {
+        setAlert({ ...alert, show: false })
+        setLoading(false)
+      }, 2000)
     }
-
-    setTimeout(() => {
-      setAlert({ ...alert, show: false })
-      setLoading(false)
-    }, 2000)
   }
 
   useEffect(() => {
