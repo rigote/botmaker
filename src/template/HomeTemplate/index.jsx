@@ -24,7 +24,7 @@ const HomeTemplate = () => {
   const [variables, setVariables] = useState([])
   const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState({
-    show: false,
+    show: true,
     variant: 'success'
   })
 
@@ -124,10 +124,6 @@ const HomeTemplate = () => {
 
   return (
     <S.Wrapper>
-      <S.Name>
-        <span>Nome</span>
-        <b>Botmaker Bot</b>
-      </S.Name>
       <Form>
         <Alert
           key={alert.variant}
