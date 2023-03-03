@@ -96,10 +96,12 @@ const HomeTemplate = () => {
     }
 
     try {
-      setAlert({ ...alert, show: true, variant: 'success' })
       setTimeout(() => {
-        setAlert({ ...alert, show: false })
-        setLoading(false)
+        setAlert({ ...alert, show: true, variant: 'success' })
+        setTimeout(() => {
+          setAlert({ ...alert, show: false })
+          setLoading(false)
+        }, 2000)
       }, 2000)
       client.request(options).then((results) => {
         console.log(results)
